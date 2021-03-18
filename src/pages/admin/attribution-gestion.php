@@ -80,19 +80,17 @@ $attributions = readAttributionJointure();
                         <label class="text-dark mb-0" for="mot de passe1">Choisir le poste informatique </label>
                         <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon" name="computer-select">
                             <option selected>Liste ordinateur disponible</option>
-                            <?php foreach ($computers as $key => $computer) : ?>
-                                <option value="<?php
-                                                echo $computer['numbers']; ?>"> <?php echo $computer['numbers'];
-                                                                            ?></option>
+                            <?php 
+                            foreach ($computers as $key => $computer) :
+                            ?>
+                                <option value="<?php echo $computer['id']; ?>"> <?php echo $computer['numbers'];  ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <!-- choix date -->
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label text-dark mb-0">Date de réservation</label>
-                        <input type="date" class="form-control" id="date-select" name="date-select" title="Veuillez selectionner un jour" required value="<?php if (isset($date_select)) {
-                                                                                                                                                                echo $date_select;
-                                                                                                                                                            } ?>">
+                        <input type="date" class="form-control" id="date-select" name="date-select" title="Veuillez selectionner un jour" required value="<?php if (isset($date_select)) {echo $date_select;     } ?>">
                         </input>
                     </div>
 

@@ -103,7 +103,7 @@ function registerComputer()
 {
     global $log;
     global $db_connect, $errors, $success, $number;
-    $number = htmlentities(($_POST['computer-select']));
+    $number = htmlentities(($_POST['number']));
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
@@ -209,8 +209,8 @@ function registerAttribution()
     if (empty($date_select)) {
         array_push($errors, "Veuillez choisir une date disponible");
     }
-    if ($computer_select > 15 || $computer_select < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+    if ($computer_select  < 0) {
+        array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
 
 
@@ -268,7 +268,7 @@ function connectAdmin()
         $user = $res->fetch_array();
         //en bdd le mot de passe est déjà hasher du coup on utilise la function de vérification de mot de passe crypté en bdd
         if (password_verify($password, $user['password'])) {
-            // echo 'mot de passe correct';
+            echo 'mot de passe correct';
             //on stocke l'information id de l'admin en session
             $_SESSION['user']['id'] = $user['id'];
             //on modifi en bdd le booleen d'authentification de 0 à 1
@@ -276,9 +276,9 @@ function connectAdmin()
             $query = $db_connect->query($sql);
             //on stock l'état d'authentification (ATTENTION!! ne pas oublier de le remettre à zéro lors de la déconnection de l'administrateur)
             $_SESSION['user']['auth'] = 1;
-            // array_push($succes, "Authentification réussie");
+            array_push($succes, "Authentification réussie");
             //redirection sur l'espace administrateur pour la gestion du parc d'ordinateur
-            header("Location:user-gestion.php");
+            header('location: attribution-gestion.php');
         } else {
             array_push($errors, "Mot de passe incorrect");
         }
@@ -494,7 +494,7 @@ function updateAttribution()
         array_push($errors, "Veuillez choisir une date disponible");
     }
     if ($computer_select > 15 || $computer_select < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+        array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
 
     //on vérifie si un poste n'est pas déjà attribuer à un utilisateuravec le même numéro de Post informatique
