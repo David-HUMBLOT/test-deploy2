@@ -214,12 +214,12 @@ function registerAttribution()
     if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
-    if (empty($time_start)) {
-        array_push($errors, "Selectionner heure de départ");
-    }
-    if (empty($time_end)) {
-        array_push($errors, "Selectionner heure de fin");
-    }
+    // if (empty($time_start)) {
+    //     array_push($errors, "Selectionner heure de départ");
+    // }
+    // if (empty($time_end)) {
+    //     array_push($errors, "Selectionner heure de fin");
+    // }
 
     if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
@@ -511,12 +511,12 @@ function updateAttribution()
     if (empty($date_select)) {
         array_push($errors, "Veuillez choisir une date disponible");
     }
-    if (empty($time_start)) {
-        array_push($errors, "Selectionner heure de départ");
-    }
-    if (empty($time_end)) {
-        array_push($errors, "Selectionner heure de fin");
-    }
+    // if (empty($time_start)) {
+    //     array_push($errors, "Selectionner heure de départ");
+    // }
+    // if (empty($time_end)) {
+    //     array_push($errors, "Selectionner heure de fin");
+    // }
     if ( $computer_select < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }

@@ -168,7 +168,7 @@ $attributions = readAttributionJointure();
                                     <td class="align-middle "><?php echo $attribution['first_name']; ?></td>
                                     <td class="align-middle "><?php echo $attribution['numbers']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;"><?php echo $attribution['crenaux']; ?></td>
-                                    <td class="align-middle " style="font-size:2vh;">   <?php echo $attribution['time_start']; ?>   <?php echo $attribution['time_end']; ?></td>
+                                    <td class="align-middle " style="font-size:2vh;">   <?php echo $attribution['time_start']; ?>  ___ <?php echo $attribution['time_end']; ?></td>
                                     <td class="align-middle">
                                         <a class="" href="attribution-gestion.php?edit-attribution=<?php echo $attribution['id']; ?>" role="button">
                                             <svg width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
