@@ -1,14 +1,10 @@
 <?php
-require '../../layout/head.php';
-require '../../../config/local-server.php';
 require '../../../config/config.php';
+require '../../layout/head.php';
 require '../../controller/admin-function.php';
 $users = readUsers();
 $computers = readComputers();
 $attributions = readAttributionJointure();
-
-// var_dump($attributions);
-
 
 
 ?>
@@ -22,7 +18,6 @@ $attributions = readAttributionJointure();
     </header>
 
     <div class="container d-flex justify-content-center">
-
         <div>
             <h1 class="shadow-lg p-3 mb-5 border border-dark rounded ">GESTIONS DES POSTES</h1>
         </div>
@@ -55,12 +50,7 @@ $attributions = readAttributionJointure();
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-                    <!-- required
-                        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" 
-                        minlength="4"
-                        maxlength="30" 
-                        size="30" 
-                         value="" -->
+  
                     <!-- ATTRIBUTION D UN ADMIN ID EN CHAMPS HIDDEN SUT ON UPDATE UN PROFIL -->
                     <?php if ($update === true) : ?>
                         <input type="hidden" name="attribution_id" value="<?php echo $attribution_id; ?>">
@@ -105,20 +95,20 @@ $attributions = readAttributionJointure();
 
 
                         <!-- heure début-->
-                        <div class=" col-md-6 col-12 px-0 mb-3 mb-md-0 pr-md-1">
+                        <!-- <div class=" col-md-6 col-12 px-0 mb-3 mb-md-0 pr-md-1">
                             <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de départ</label>
-                            <input  min="07:00" max="18:00" type="time" class="form-control" id="time-start" name="time-start" value="" >
+                            <input  type="time" min="07:00" max="18:00" class="form-control" id="time-start" name="time-start"  >
                             </input>
-                        </div>
+                        </div> -->
 
 
                         <!-- heure de fin-->
-                        <div class="col-md-6 col-12 px-0 pl-md-1">
+                        <!-- <div class="col-md-6 col-12 px-0 pl-md-1">
                             <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de fin</label>
-                            <input  min="07:00" max="18:00"  type="time" class="form-control" id="time-end" name="time-end"  value="">
+                            <input type="time" min="07:00" max="18:00"   class="form-control" id="time-end" name="time-end"  >
                             </input>
                         </div>
-                </div>
+                </div> -->
                
 
                     <!-- BOUTONS CREATE OR UPDATE -->
