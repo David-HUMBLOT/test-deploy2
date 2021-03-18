@@ -493,7 +493,7 @@ function updateAttribution()
     if (empty($date_select)) {
         array_push($errors, "Veuillez choisir une date disponible");
     }
-    if ($computer_select > 15 || $computer_select < 0) {
+    if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
 
