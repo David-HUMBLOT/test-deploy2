@@ -1,18 +1,28 @@
 <?php
+require '../../layout/head.php';
+require '../../../config/local-server.php';
 require '../../../config/config.php';
 require '../../controller/admin-function.php';
-require '../../layout/head.php';
 $users = readUsers();
 $computers = readComputers();
 $attributions = readAttributionJointure();
+
+// var_dump($attributions);
+
+
+
 ?>
 <title>attribution</title>
 </head>
+
 <body>
+
     <header class="container">
         <?php require '../../layout/navbar.php'; ?>
     </header>
+
     <div class="container d-flex justify-content-center">
+
         <div>
             <h1 class="shadow-lg p-3 mb-5 border border-dark rounded ">GESTIONS DES POSTES</h1>
         </div>
@@ -21,9 +31,13 @@ $attributions = readAttributionJointure();
         <div class="container d-flex flex-column align-items-center justify-content-center ">
             <!-- FORMULAIRE -->
             <div class="mb-5   col-lg-8 col-md-8 col-12">
-                <h4 class="text-center mb-4"> <?php if (isset($userAttributions)) { echo 'MODIFIER RESERVATION  ' . $userAttributions; }
-                else { ?> FAIRE UNE ATTRIBUTION   <?php  }    ?></h4>
+
+                <h4 class="text-center mb-4"> <?php if (isset($userAttributions)) { echo 'MODIFIER RESERVATION ' . $userAttributions; }
+                else { ?> FAIRE UNE ATTRIBUTION   <?php }
+                ?></h4>
+
                 <form class="col px-3 py-4 shadow-lg " method="POST" enctype="multipart/form-data">
+
                     <!-- MESSAGE D ERREUR -->
                     <?php if (count($errors) > 0) : ?>
                         <div class="alert alert-danger" role="alert">
@@ -32,6 +46,7 @@ $attributions = readAttributionJointure();
                             <?php endforeach; ?>
                         </div>
                     <?php endif ?>
+
                     <!-- MESSAGE SUCCESS -->
                     <?php if (count($success) > 0) : ?>
                         <div class="alert alert-success" role="alert">
@@ -50,6 +65,7 @@ $attributions = readAttributionJointure();
                     <?php if ($update === true) : ?>
                         <input type="hidden" name="attribution_id" value="<?php echo $attribution_id; ?>">
                     <?php endif; ?>
+
                     <!-- Choix d un utilisateur-->
                     <div class="mb-3">
                         <label class="text-dark mb-0" for="mot de passe1">Choisir un utilisateur </label>
@@ -60,6 +76,7 @@ $attributions = readAttributionJointure();
                             <?php endforeach; ?>
                         </select>
                     </div>
+
                     <!-- Choix du post-->
                     <div class="mb-3">
                         <label class="text-dark mb-0" for="mot de passe1">Choisir le poste informatique </label>
@@ -78,15 +95,41 @@ $attributions = readAttributionJointure();
                         <input type="date" class="form-control" id="date-select" name="date-select" title="Veuillez selectionner un jour" required value="<?php if (isset($date_select)) {echo $date_select;     } ?>">
                         </input>
                     </div>
+
+                 
+
+
+                 <!-- horaire -->
+                 <div class="mb-3 d-flex flex-column flex-md-row justify-content-between">
+
+
+
+                        <!-- heure début-->
+                        <div class=" col-md-6 col-12 px-0 mb-3 mb-md-0 pr-md-1">
+                            <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de départ</label>
+                            <input  min="07:00" max="18:00" type="time" class="form-control" id="time-start" name="time-start" value="" >
+                            </input>
+                        </div>
+
+
+                        <!-- heure de fin-->
+                        <div class="col-md-6 col-12 px-0 pl-md-1">
+                            <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de fin</label>
+                            <input  min="07:00" max="18:00"  type="time" class="form-control" id="time-end" name="time-end"  value="">
+                            </input>
+                        </div>
+                </div>
+               
+
                     <!-- BOUTONS CREATE OR UPDATE -->
                     <!-- si on modifie l'utilisateur , on affiche le bouton de mise à jour au lieu du bouton de création -->
                     <?php if ($update === true) : ?>
                         <div class="d-flex justify-content-center m-5">
-                            <button type="submit" name="update-attribution" class="btn btn-dark shadow-lg ">Modifier l' attribution</button>
+                            <button type="submit" name="update-attribution" class="btn btn-dark shadow-lg ">Modifier </button>
                         </div>
                     <?php else : ?>
                         <div class="d-flex justify-content-center m-5">
-                            <button type="submit" name="register-attribution" class="btn btn-dark shadow-lg ">Valider l'attribution</button>
+                            <button type="submit" name="register-attribution" class="btn btn-dark shadow-lg ">Valider </button>
                         </div>
                     <?php endif; ?>
                     <!-- BOUTON AJOUTER -->
@@ -98,6 +141,7 @@ $attributions = readAttributionJointure();
             </div>
         </div>
     </section>
+
     <section class="container col-10 mb-5">
         <div>
             <?php if (empty($attributions)) : ?>
@@ -105,13 +149,14 @@ $attributions = readAttributionJointure();
             <?php else : ?>
                 <h4 class="text-center mb-4">LISTES DES ATTRIBUTIONS</h4>
                 <table class="table table-bordered  text-center">
+
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Utilisateur</th>
                             <th scope="col">Ordinateur</th>
-                            <th scope="col">Crénaux</th>
-                            <th scope="col">ID attribution</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Horaire</th>
                             <th colspan="2">actions</th>
                         </tr>
                     </thead>
@@ -123,7 +168,7 @@ $attributions = readAttributionJointure();
                                     <td class="align-middle "><?php echo $attribution['first_name']; ?></td>
                                     <td class="align-middle "><?php echo $attribution['numbers']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;"><?php echo $attribution['crenaux']; ?></td>
-                                    <td class="align-middle " style="font-size:2vh;"><?php echo $attribution['user_id']; ?></td>
+                                    <td class="align-middle " style="font-size:2vh;">   <?php echo $attribution['time_start']; ?>   <?php echo $attribution['time_end']; ?></td>
                                     <td class="align-middle">
                                         <a class="" href="attribution-gestion.php?edit-attribution=<?php echo $attribution['id']; ?>" role="button">
                                             <svg width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -148,12 +193,17 @@ $attributions = readAttributionJointure();
             <?php endif; ?>
         </div>
     </section>
+
+
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 </body>
+
+
 <div class="container  d-flex justify-content-center">
     <?php require '../../layout/footer.php'; ?>
 </div>
+
 </html>

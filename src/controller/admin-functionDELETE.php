@@ -7,10 +7,6 @@ $auth = "0";
 $update = "false";
 $errors = array();
 $success = array();
-$time_start="";
-$time_start="";
-
-
 //Si je clique sur le bouton de connection
 if (isset($_POST['connect-admin'])) {
     connectAdmin($_POST);
@@ -19,9 +15,6 @@ if (isset($_POST['connect-admin'])) {
 if (isset($_GET['disconnect-admin'])) {
     disconnectAdmin($GET);
 }
-
-
-
 // Si je clique sur le bouton ajouter un utilisateur
 if (isset($_POST['register-user'])) {
     registerUser($_POST);
@@ -34,9 +27,6 @@ if (isset($_POST['register-computer'])) {
 if (isset($_POST['register-attribution'])) {
     registerAttribution($_POST);
 }
-
-
-
 // si je clique sur l'icône modifier un utilisateur
 if (isset($_GET['edit-user'])) {
     $update = true;
@@ -59,9 +49,6 @@ if (isset($_GET['edit-attribution'])) {
    
 }
 
-
-
-
 //si je clique sur le bouton mettre a jour un utilisateur
 if (isset($_POST['update-user'])) {
     updateUser();
@@ -74,8 +61,6 @@ if (isset($_POST['update-computer'])) {
 if (isset($_POST['update-attribution'])) {
     updateAttribution();
 }
-
-
 
 //si je clique sur l'icone pr supprimer une attribution
 if (isset($_GET['delete-attribution'])) {
@@ -98,7 +83,7 @@ if (isset($_GET['delete-user'])) {
 }
 
 // FONCTION ajout d'ordinateur
-//good
+
 function registerComputer()
 {
     global $log;
@@ -107,8 +92,8 @@ function registerComputer()
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
-    if ($number > 15 || $number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+    if ($number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
     $sql = "SELECT * FROM computers";
@@ -130,9 +115,9 @@ function registerComputer()
         array_push($success, "Ajout de l'ordinateur réussi");
     }
 }
-//function registerComputer good
+
 // FONCTION ajout utilisateur
-//good
+
 function registerUser()
 {
     global $log;
@@ -188,19 +173,14 @@ function registerUser()
 
 
 // FONCTION ajout d'ordinateur
-//good
+
 function registerAttribution()
 {
     global $log;
-    global $db_connect, $errors, $success, $user_select, $computer_select, $date_select, $time_start, $time_end;
-
-
-
+    global $db_connect, $errors, $success, $user_select, $computer_select, $date_select;
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
-    $time_start = ($_POST['time-start']);
-    $time_end = ($_POST['time-end']);
 
     if (empty($user_select)) {
         array_push($errors, "Veuillez choisir un utilisateur disponible");
@@ -214,18 +194,6 @@ function registerAttribution()
     if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
-    if (empty($time_start)) {
-        array_push($errors, "Selectionner heure de départ");
-    }
-    if (empty($time_end)) {
-        array_push($errors, "Selectionner heure de fin");
-    }
-
-    if ($computer_select  < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
-    }
-
-
     //on vérifie si un poste n'est pas déjà attribuer à un utilisateuravec le même numéro de Post informatique
     $sql = "SELECT * FROM attributions";
     $query = $db_connect->query($sql);
@@ -243,7 +211,7 @@ function registerAttribution()
     }
     if (count($errors) == 0) {
         $etat = "0";
-        $sql = "INSERT INTO `attributions` (user_id, computer_id,  crenaux, time_start,time_end,  created) VALUES ( '$user_select', '$computer_select','$date_select', '$time_start', '$time_end',now() )";
+        $sql = "INSERT INTO `attributions` (user_id, computer_id,  crenaux,  created) VALUES ( '$user_select', '$computer_select','$date_select', now() )";
 
         $req = $db_connect->prepare($sql); //preparation de la requete
         $req->execute(); //execution de la requete
@@ -252,10 +220,8 @@ function registerAttribution()
     }
 }
 
-
-//fonction registerUser good
 // FONCTION CONNECTION ADMINISTRATEUR
-//good
+
 function connectAdmin()
 {
     global $log;
@@ -295,12 +261,12 @@ function connectAdmin()
             array_push($errors, "Mot de passe incorrect");
         }
     } else {
-        array_push($errors, " Compte inexistant... <br/> Veuillez créer un compte.");
+        array_push($errors, " Accès non autorisé. Compte administrateur requis");
     }
 }
-//function connectAdmin good
+
 // FONCTION DECONNECTION ADMINISTRATEUR
-//good
+
 function disconnectAdmin()
 {
     global $db_connect;
@@ -315,9 +281,9 @@ function disconnectAdmin()
     //on redirige sur la page de bienvenue
     header('location: ../../../index.php');
 }
-//function disconnectAdmin good
+
 //FONCTION READUSER
-//good
+
 function readUsers()
 {
     global $db_connect;
@@ -327,7 +293,7 @@ function readUsers()
     return $users;
 }
 //FONCTION READUSER
-//good
+
 function readComputers()
 {
     global $db_connect;
@@ -338,7 +304,7 @@ function readComputers()
 }
 
 //FONCTION READ ATTRIBUTION
-//good
+
 function readAttributions()
 {
     global $db_connect;
@@ -349,7 +315,7 @@ function readAttributions()
 }
 
 //FINCTION edituser
-//good
+
 function editUser($user_id)
 {
     global $db_connect, $update, $role, $email, $user_id, $email, $phone, $first_name, $last_name;
@@ -361,15 +327,12 @@ function editUser($user_id)
     $email = $users['email'];
     $phone = $users['phone'];
 }
-// good
 
-// 8888888888888888888888888888
-//FINCTION editattribution
-//good
+//FONCTION editattribution
+
 function editAttribution($attribution_id)
 {
-
-    global $db_connect, $update, $attribution_id, $user_select, $computer_select, $date_select, $time_start, $time_end;
+    global $db_connect, $update, $attribution_id, $user_select, $computer_select, $date_select;
     $update = true;
     $sql = "SELECT * FROM attributions WHERE id = $attribution_id LIMIT 1";
     $query = $db_connect->query($sql);
@@ -377,18 +340,8 @@ function editAttribution($attribution_id)
     $user_select = $attributions['user_id'];
     $computer_select = $attributions['computer_id'];
     $date_select = $attributions['crenaux'];
-    $time_start_select = $attributions['time_start'];
-    $time_end_select = $attributions['time_end'];
-    // $attribution_id = ['computer_id'];
-    // $attribution_id = $computer_select;
-    // $attribution_id = $user_select;
-   
-
 }
-// good
 
-//FINCTION edituser
-//good
 function editComputer($computer_id)
 {
     global $db_connect, $update, $number, $computers;
@@ -397,8 +350,6 @@ function editComputer($computer_id)
     $computers = $query->fetch_array(MYSQLI_ASSOC);
     $number = $computers['numbers'];
 }
-// good
-
 
 function updateUser()
 {
@@ -497,9 +448,6 @@ function updateAttribution()
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
-    $time_start = ($_POST['time-start']);
-    $time_end = ($_POST['time-end']);
-
   
 
     if (empty($user_select)) {
@@ -510,12 +458,6 @@ function updateAttribution()
     }
     if (empty($date_select)) {
         array_push($errors, "Veuillez choisir une date disponible");
-    }
-    if (empty($time_start)) {
-        array_push($errors, "Selectionner heure de départ");
-    }
-    if (empty($time_end)) {
-        array_push($errors, "Selectionner heure de fin");
     }
     if ( $computer_select < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
@@ -540,12 +482,7 @@ function updateAttribution()
 
     if (count($errors) == 0) {
         $attribution_id = $_POST['attribution_id'];
-        $sql = "UPDATE  `attributions` SET user_id = '$user_select', computer_id = '$computer_select' ,
-         crenaux = '$date_select',
-        time_start = '$time_start',
-         time_end= '$time_end',
-          update_at = now()  WHERE computer_id = '$attribution_id' LIMIT 1 ";
-
+        $sql = "UPDATE  `attributions` SET user_id = '$user_select', computer_id = '$computer_select' , crenaux = '$date_select',  update_at = now()  WHERE computer_id = '$attribution_id' LIMIT 1 ";
         $req = $db_connect->prepare($sql); //preparation de la requete
         $req->execute(); //execution de la requete
         // $query = $db_connect->query($sql);
