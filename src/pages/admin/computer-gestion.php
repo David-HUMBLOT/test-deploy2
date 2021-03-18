@@ -59,7 +59,7 @@ $computers = readComputers();
                     <!-- Post informatique-->
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label text-dark mb-5">Numéro du poste informatique <br><i>(les posts sont desactivé par défaut)</i></label>
-                        <input type="number" class="form-control" id="number" name="number" placeholder="Numéro du Post" title="Veuillez saisir le numéro du poste"  value="<?php if(isset($number)){echo $number;} ?>">
+                        <input type="number" class="form-control" id="number" min="0" name="number" placeholder="Numéro du Post" title="Veuillez saisir le numéro du poste"  value="<?php if(isset($number)){echo $number;} ?>">
                         </input>
                     </div>
 
