@@ -82,7 +82,7 @@ $attributions = readAttributionJointure();
                             <option selected>Liste ordinateur disponible</option>
                             <?php foreach ($computers as $key => $computer) : ?>
                                 <option value="<?php
-                                                echo $computer['id']; ?>"> <?php echo $computer['numbers'];
+                                                echo $computer['numbers']; ?>"> <?php echo $computer['numbers'];
                                                                             ?></option>
                             <?php endforeach; ?>
                         </select>
