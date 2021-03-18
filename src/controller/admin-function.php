@@ -103,7 +103,7 @@ function registerComputer()
 {
     global $log;
     global $db_connect, $errors, $success, $number;
-    $number = htmlentities(($_POST['number']));
+    $number = htmlentities(($_POST['computer-select']));
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
