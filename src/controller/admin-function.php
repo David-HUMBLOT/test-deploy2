@@ -276,9 +276,9 @@ function connectAdmin()
             $query = $db_connect->query($sql);
             //on stock l'état d'authentification (ATTENTION!! ne pas oublier de le remettre à zéro lors de la déconnection de l'administrateur)
             $_SESSION['user']['auth'] = 1;
-            array_push($succes, "Authentification réussie");
+            // array_push($succes, "Authentification réussie");
             //redirection sur l'espace administrateur pour la gestion du parc d'ordinateur
-            header('location: attribution-gestion.php');
+            header("Location: user-gestion.php");
         } else {
             array_push($errors, "Mot de passe incorrect");
         }
