@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 17 mars 2021 à 16:02
+-- Généré le :  jeu. 18 mars 2021 à 10:06
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -40,7 +40,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `password`, `auth`) VALUES
-(1, 'admin@admin.com', '$2y$10$q9Qt/671Qtkopks.2csdheV9HzjSxCWI/jx8/.YpddBvRsy9ZFn9a', 1);
+(1, 'admin@admin.com', '$2y$10$q9Qt/671Qtkopks.2csdheV9HzjSxCWI/jx8/.YpddBvRsy9ZFn9a', 0);
 
 -- --------------------------------------------------------
 
@@ -71,15 +71,6 @@ CREATE TABLE `computers` (
   `update_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `computers`
---
-
-INSERT INTO `computers` (`id`, `numbers`, `etat`, `created`, `update_at`) VALUES
-(6, 1, 0, '2021-03-16 08:19:34', NULL),
-(7, 5, 0, '2021-03-16 08:36:13', '2021-03-17 08:08:41'),
-(11, 4, 0, '2021-03-17 14:57:02', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -96,13 +87,6 @@ CREATE TABLE `users` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `phone`, `created`, `update_at`) VALUES
-(23, 'Testsuppressioncascade', 'Testsuppressioncascade', 'test@test.com', '$2y$10$7LoSolBoiQJgU9RI77OmauCMzbZ6Q3.AYi7agzhPNDy8ZAV6zSIRi', 692909090, '2021-03-16 22:04:18', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -147,7 +131,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT pour la table `attributions`
 --
 ALTER TABLE `attributions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `computers`
 --
