@@ -13,7 +13,7 @@
 $host = "eu-cdbr-west-03.cleardb.net";
 $login = "ba707d338cd120";
 $pwd = "00cbd8e5";
-$db = "heroku_e725779b43b3b92";
+$db = heroku_e725779b43b3b92;
 
 // connexion à la BDD
 $db_connect = mysqli_connect($host, $login, $pwd, $db);
@@ -40,13 +40,13 @@ if ($db_connect->connect_error) {
 }
 
 else{
-    // echo 'Connection à la bdd réussi';
-    // echo '<br>';
-    // echo 'Host information: '.$db_connect->host_info;
-    // echo '<br>';
-    // echo 'Protocol version: '.$db_connect->protocol_version;
+    echo 'Connection à la bdd réussi';
+    echo '<br>';
+    echo 'Host information: '.$db_connect->host_info;
+    echo '<br>';
+    echo 'Protocol version: '.$db_connect->protocol_version;
     
-    // $db_connect->close();
+    $db_connect->close();
 }
 
 
