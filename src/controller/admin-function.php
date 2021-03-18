@@ -268,7 +268,7 @@ function connectAdmin()
         $user = $res->fetch_array();
         //en bdd le mot de passe est déjà hasher du coup on utilise la function de vérification de mot de passe crypté en bdd
         if (password_verify($password, $user['password'])) {
-            echo 'mot de passe correct';
+            // echo 'mot de passe correct';
             //on stocke l'information id de l'admin en session
             $_SESSION['user']['id'] = $user['id'];
             //on modifi en bdd le booleen d'authentification de 0 à 1
