@@ -1,7 +1,6 @@
 <?php  
 
-// connexion à la BDD
-// $db_connect = mysqli_connect($host, $login, $pwd, $db);
+
 
 
 //connection en local
@@ -16,6 +15,9 @@ $login = "ba707d338cd120";
 $pwd = "00cbd8e5";
 $db = "heroku_e725779b43b3b92";
 
+// connexion à la BDD
+$db_connect = mysqli_connect($host, $login, $pwd, $db);
+
 
 // $db_host = 'localhost';
 // $db_user = 'root';
@@ -23,12 +25,12 @@ $db = "heroku_e725779b43b3b92";
 // $db_db = 'information_schema';
 // $db_port = 8889;
 
-$db_connect = new mysqli(
-    $host,
-    $login,
-    $pwd,
-    $db
-);
+// $db_connect = new mysqli(
+//     $host,
+//     $login,
+//     $pwd,
+//     $db
+// );
 	
 if ($db_connect->connect_error) {
     echo 'Errno: '.$db_connect->connect_errno;
