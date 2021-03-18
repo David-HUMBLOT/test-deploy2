@@ -1,23 +1,18 @@
 <?php
-require '../../layout/head.php';
-require '../../../config/local-server.php';
 require '../../../config/config.php';
 require '../../controller/admin-function.php';
+require '../../layout/head.php';
 $users = readUsers();
 $computers = readComputers();
 $attributions = readAttributionJointure();
-
 ?>
 <title>attribution</title>
 </head>
-
 <body>
     <header class="container">
         <?php require '../../layout/navbar.php'; ?>
     </header>
-
     <div class="container d-flex justify-content-center">
-
         <div>
             <h1 class="shadow-lg p-3 mb-5 border border-dark rounded ">GESTIONS DES POSTES</h1>
         </div>
@@ -26,13 +21,9 @@ $attributions = readAttributionJointure();
         <div class="container d-flex flex-column align-items-center justify-content-center ">
             <!-- FORMULAIRE -->
             <div class="mb-5   col-lg-8 col-md-8 col-12">
-
                 <h4 class="text-center mb-4"> <?php if (isset($userAttributions)) { echo 'MODIFIER RESERVATION  ' . $userAttributions; }
-                else { ?> FAIRE UNE ATTRIBUTION   <?php }
-                ?></h4>
-
+                else { ?> FAIRE UNE ATTRIBUTION   <?php  }    ?></h4>
                 <form class="col px-3 py-4 shadow-lg " method="POST" enctype="multipart/form-data">
-
                     <!-- MESSAGE D ERREUR -->
                     <?php if (count($errors) > 0) : ?>
                         <div class="alert alert-danger" role="alert">
@@ -41,7 +32,6 @@ $attributions = readAttributionJointure();
                             <?php endforeach; ?>
                         </div>
                     <?php endif ?>
-
                     <!-- MESSAGE SUCCESS -->
                     <?php if (count($success) > 0) : ?>
                         <div class="alert alert-success" role="alert">
@@ -60,7 +50,6 @@ $attributions = readAttributionJointure();
                     <?php if ($update === true) : ?>
                         <input type="hidden" name="attribution_id" value="<?php echo $attribution_id; ?>">
                     <?php endif; ?>
-
                     <!-- Choix d un utilisateur-->
                     <div class="mb-3">
                         <label class="text-dark mb-0" for="mot de passe1">Choisir un utilisateur </label>
@@ -71,7 +60,6 @@ $attributions = readAttributionJointure();
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                     <!-- Choix du post-->
                     <div class="mb-3">
                         <label class="text-dark mb-0" for="mot de passe1">Choisir le poste informatique </label>
@@ -90,7 +78,6 @@ $attributions = readAttributionJointure();
                         <input type="date" class="form-control" id="date-select" name="date-select" title="Veuillez selectionner un jour" required value="<?php if (isset($date_select)) {echo $date_select;     } ?>">
                         </input>
                     </div>
-
                     <!-- BOUTONS CREATE OR UPDATE -->
                     <!-- si on modifie l'utilisateur , on affiche le bouton de mise à jour au lieu du bouton de création -->
                     <?php if ($update === true) : ?>
@@ -111,7 +98,6 @@ $attributions = readAttributionJointure();
             </div>
         </div>
     </section>
-
     <section class="container col-10 mb-5">
         <div>
             <?php if (empty($attributions)) : ?>
@@ -119,7 +105,6 @@ $attributions = readAttributionJointure();
             <?php else : ?>
                 <h4 class="text-center mb-4">LISTES DES ATTRIBUTIONS</h4>
                 <table class="table table-bordered  text-center">
-
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col"></th>
@@ -163,17 +148,12 @@ $attributions = readAttributionJointure();
             <?php endif; ?>
         </div>
     </section>
-
-
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 </body>
-
-
 <div class="container  d-flex justify-content-center">
     <?php require '../../layout/footer.php'; ?>
 </div>
-
 </html>

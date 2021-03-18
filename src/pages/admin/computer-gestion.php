@@ -1,21 +1,15 @@
 <?php
-require '../../layout/head.php';
-require '../../../config/local-server.php';
 require '../../../config/config.php';
 require '../../controller/admin-function.php';
+require '../../layout/head.php';
 $computers = readComputers();
-
-
 ?>
 <title>attribution</title>
 </head>
-
 <body>
-
     <header class="container">
         <?php require '../../layout/navbar.php'; ?>
     </header>
-
     <div class="container d-flex justify-content-center">
         <!-- LOGO -->
         <div class="m-0">
@@ -24,15 +18,11 @@ $computers = readComputers();
     </div>
     <section>
         <div class="container d-flex flex-column align-items-center justify-content-center ">
-    
             <!-- FORMULAIRE -->
             <div class="mb-5   col-lg-8 col-md-8 col-12">
             <h4 class="text-center mb-4"> <?php if(isset($number)){echo ' MODIFIER LE PC '. $number;}
-            else { ?> AJOUTER UN ORDINATEUR <?php }
-            ?></h4>
-
+            else { ?> AJOUTER UN ORDINATEUR <?php    }    ?></h4>
                 <form class="col px-3 py-4 shadow-lg " method="POST">
-
                     <!-- MESSAGE D ERREUR -->
                     <?php if (count($errors) > 0) : ?>
                         <div class="alert alert-danger" role="alert">
@@ -41,7 +31,6 @@ $computers = readComputers();
                             <?php endforeach; ?>
                         </div>
                     <?php endif ?>
-
                     <!-- MESSAGE SUCCESS -->
                     <?php if (count($success) > 0) : ?>
                         <div class="alert alert-success" role="alert">
@@ -50,19 +39,16 @@ $computers = readComputers();
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-
                     <!-- ATTRIBUTION D UN ADMIN ID EN CHAMPS HIDDEN SUT ON UPDATE UN PROFIL -->
                     <?php if ($update === true) : ?>
                         <input type="hidden" name="computer_id" value="<?php echo $computer_id; ?>">
                     <?php endif ?>
-
                     <!-- Post informatique-->
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label text-dark mb-5">Numéro du poste informatique <br><i>(les posts sont desactivé par défaut)</i></label>
                         <input type="number" class="form-control" id="number" min="0" name="number" placeholder="Numéro du Post" title="Veuillez saisir le numéro du poste"  value="<?php if(isset($number)){echo $number;} ?>">
                         </input>
                     </div>
-
                     <?php if ($update === true) : ?>
                         <div class="d-flex justify-content-center m-5 ">
                         <button type="submit" name="update-computer" class="btn btn-dark shadow-lg ">Modifier cet ordinateur</button>
@@ -72,18 +58,14 @@ $computers = readComputers();
                         <button type="submit" name="register-computer" class="btn btn-dark shadow-lg ">Ajouter un ordinateur</button>
                     </div>
                     <?php endif; ?>
-
-
                     <!-- BOUTON AJOUTER ORDINATEUR -->
                     <!-- <div class="d-flex justify-content-center m-5 ">
                         <button type="submit" name="register-computer" class="btn btn-dark shadow-lg ">Ajouter un ordinateur</button>
                     </div> -->
-
                 </form>
             </div>
         </div>
     </section>
-
     <section class="container col-10 mb-5">
         <div>
             <?php if (empty($computers)) : ?>
@@ -91,7 +73,6 @@ $computers = readComputers();
             <?php else : ?>
                 <h4 class="text-center mb-4">LISTE DES ORDINATEURS</h4>
                 <table class="table table-bordered  text-center">
-
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col"></th>
@@ -105,7 +86,6 @@ $computers = readComputers();
                         <?php foreach ($computers as $key => $computer) : ?>
                             <div class="user">
                                 <tr>
-
                                     <th scope="row"><?php echo $key + 1; ?></th>
                                     <td class="align-middle "><?php echo $computer['numbers']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;"><?php echo $computer['id']; ?></td>
@@ -119,7 +99,6 @@ $computers = readComputers();
                                         </a>
                                     </td>
                                     <td class="align-middle">
-
                                         <a class="text-danger" href="computer-gestion.php?delete-computer=<?php echo $computer['id']; ?>" role="button">
                                             <svg width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16" disabled>
                                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -135,15 +114,11 @@ $computers = readComputers();
             <?php endif; ?>
         </div>
     </section>
-
     <div class="container  d-flex justify-content-center">
         <?php require '../../layout/footer.php'; ?>
     </div>
-
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 </body>
-
-
 </html>

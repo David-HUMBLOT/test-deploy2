@@ -1,36 +1,27 @@
 <?php
-require '../../layout/head.php';
-require '../../../config/local-server.php';
 require '../../../config/config.php';
 require '../../controller/admin-function.php';
+require '../../layout/head.php';
 $users = readUsers();
 ?>
 <title>utilisateur</title>
 </head>
-
 <body>
-
     <header class="container">
         <?php require '../../layout/navbar.php'; ?>
     </header>
-
     <div class="container d-flex justify-content-center">
         <div>
             <h1 class="shadow-lg p-3 mb-5 border border-dark rounded ">UTILISATEUR</h1>
         </div>
     </div>
-
     <section>
         <div class="container d-flex flex-column align-items-center justify-content-center ">
-    
             <!-- FORMULAIRE -->
             <div class="mb-5   col-lg-8 col-md-8 col-12">
             <h4 class="text-center mb-4">  <?php if(isset($last_name)){echo 'MODIFICATION '.$last_name;} 
-            else {
-                ?> AJOUTER UN UTILISATEUR <?php
-            }
-            ?></h4>
-
+            else { ?> AJOUTER UN UTILISATEUR <?php
+            }  ?></h4>
 
                 <form class="col px-3 py-4 shadow-lg " method="POST" enctype="multipart/form-data">
                     <!-- MESSAGE D ERREUR -->
@@ -41,7 +32,6 @@ $users = readUsers();
                             <?php endforeach; ?>
                         </div>
                     <?php endif ?>
-
                     <!-- MESSAGE SUCCESS -->
                     <?php if (count($success) > 0) : ?>
                         <div class="alert alert-success" role="alert">
@@ -50,7 +40,6 @@ $users = readUsers();
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-
                     <!-- NE PAS AFFACER SERVIRA POUR EXPLIQUER LA SECURIT2 FORMULAIRE DU COT2 DE PHP (double securisation) -->
                     <!-- required
                         pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" 
@@ -58,16 +47,11 @@ $users = readUsers();
                         maxlength="30" 
                         size="30" 
                          value="" -->
-
-
                     <!-- ATTRIBUTION D UN ADMIN ID EN CHAMPS HIDDEN SUT ON UPDATE UN PROFIL -->
                     <?php if ($update === true) : ?>
                         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <?php endif ?>
-
-
                     <!-- ATTENTION nom et prénom sur la meme ligne ! -->
-
                     <div class="mb-3 d-flex flex-column flex-md-row justify-content-between">
                         <!-- NOM DATA TYPE VARCHAR-->
                         <div class=" col-md-6 col-12 px-0 mb-3 mb-md-0 pr-md-1">
@@ -76,7 +60,6 @@ $users = readUsers();
                             <input type="text" class="form-control" id="nom" name="last_name" placeholder="HUMBLOT" title="Veuillez inscrire votre Nom" required pattern="([A-z0-9À-ž\s]){2,}" minlength="4" maxlength="50" size="50" value="<?php if(isset($last_name)){echo $last_name;}  ?>">
                             </input>
                         </div>
-
                         <!-- PRENOM DATA TYPE VARCHAR-->
                         <div class="col-md-6 col-12 px-0 pl-md-1">
                             <label for="exampleFormControlInput1" class="form-label text-dark mb-0">Prénom*</label>
@@ -84,35 +67,29 @@ $users = readUsers();
                             </input>
                         </div>
                     </div>
-
                     <!-- EMAIL DATA TYPE SQL VARCHAR -->
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label text-dark mb-0">Email* </label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" title="Veuillez inscrire votre email" size="60" minlength="3" maxlength="60" required value="<?php if(isset($email)){echo $email;}  ?>">
                         </input>
                     </div>
-
                     <!-- MOT DE PASSE DATA TYPE VARCHAR 100 CAR LE MOTE DE PASSE SERA HASHER-->
                     <div class="mb-3 ">
                         <label class="text-dark mb-0" for="mot de passe1">Mot de passe* </label>
                         <input type="password" class="form-control" id="password_1" name="password_1" required pattern="?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Saisir un mot de passe" minlength="1" maxlength="20" size="20" value="">
                         </input>
                     </div>
-
                     <!-- CONFIRMATION MOT DE PASSE PAS NECESSAIRE A L INSERTION EN BDD MAIS UTILSE POUR CONFIRMER LE PASSWORD-->
                     <div class="mb-3 ">
                         <label class="text-dark mb-0" for="mot de passe2">Confirmation* </label>
                         <input type="password" class="form-control" id="password_2" name="password_2" required pattern="?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Confirmation mot de passe" minlength="1" maxlength="20" size="20" value="">
                         </input>
                     </div>
-
                     <!-- TELEPHONE -->
                     <div class="mb-3 text-start">
                         <label for="phone" class="form-label">Téléphone</label>
                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="0692010203" title="Inscrire votre numéro de téléphone (format 00 00 00 00 00)" required pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" value="<?php if(isset($phone)){echo $phone;} ?>">
                     </div>
-
-
                     <!-- BOUTONS CREATE OR UPDATE -->
                     <!-- si on modifie l'utilisateur , on affiche le bouton de mise à jour au lieu du bouton de création -->
                     <?php if ($update === true) : ?>
@@ -133,17 +110,13 @@ $users = readUsers();
             </div>
         </div>
     </section>
-
     <section class="container col-10 mb-5">
         <div>
             <?php if (empty($users)) : ?>
                 <h4 class="text-center mb-4">AUCUN UTILISATEUR</h4>
             <?php else : ?>
                 <h4 class="text-center mb-4">LISTES DES UTILISATEURS</h4>
-             
-
                 <table class="table table-bordered  text-center">
-
                     <thead class="text-uppercase">
                         <tr>
                             <th scope="col"></th>
@@ -157,7 +130,6 @@ $users = readUsers();
                         <?php foreach ($users as $key => $user) : ?>
                             <div class="user">
                                 <tr>
-
                                     <th scope="row"><?php echo $key + 1; ?></th>
                                     <td class="align-middle "><?php echo $user['last_name']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;"><?php echo $user['email']; ?></td>
@@ -171,7 +143,6 @@ $users = readUsers();
                                         </a>
                                     </td>
                                     <td class="align-middle">
-
                                         <a class="text-danger" href="user-gestion.php?delete-user=<?php echo $user['id']; ?>" role="button">
                                             <svg width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16" disabled>
                                                 <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -187,17 +158,12 @@ $users = readUsers();
             <?php endif; ?>
         </div>
     </section>
-
-
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 </body>
-
-
 <div class="container  d-flex justify-content-center">
     <?php require '../../layout/footer.php'; ?>
 </div>
-
 </html>
