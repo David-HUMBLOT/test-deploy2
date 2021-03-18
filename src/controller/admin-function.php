@@ -457,7 +457,7 @@ function updateComputer()
     $computers = $query->fetch_all(MYSQLI_ASSOC);
     if (is_array($computers)) {
         foreach ($computers as $key => $computer) {
-            if ($computer['number'] === $number) {
+            if ($computer['numbers'] === $number) {
                 array_push($errors, "Ce numéro de post est déjà attribué");
             }
         }
