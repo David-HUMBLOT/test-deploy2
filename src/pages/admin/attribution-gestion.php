@@ -96,19 +96,19 @@ $attributions = readAttributionJointure();
 
                         <!-- heure début-->
                         <div class=" col-md-6 col-12 px-0 mb-3 mb-md-0 pr-md-1">
-                            <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de départ</label>
+                            <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure d'arriver</label>
                             <input  type="time" min="07:00" max="18:00" class="form-control" id="time-start" name="time-start"  >
                             </input>
                         </div>
 
 
                         <!-- heure de fin-->
-                        <!-- <div class="col-md-6 col-12 px-0 pl-md-1">
+                        <div class="col-md-6 col-12 px-0 pl-md-1">
                             <label for="exampleFormControlInput1" class="form text-dark mb-0">Heure de fin</label>
                             <input type="time" min="07:00" max="18:00"   class="form-control" id="time-end" name="time-end"  >
                             </input>
                         </div>
-                </div> -->
+                </div>
                
 
                     <!-- BOUTONS CREATE OR UPDATE -->
