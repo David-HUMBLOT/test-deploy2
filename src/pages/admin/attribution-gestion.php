@@ -6,15 +6,12 @@ require '../../controller/admin-function.php';
 $users = readUsers();
 $computers = readComputers();
 $attributions = readAttributionJointure();
-// var_dump($attributions);
-//  $userAttributions = readUserAtt($attribution_id);
-// var_dump($userAttributions);
+
 ?>
 <title>attribution</title>
 </head>
 
 <body>
-
     <header class="container">
         <?php require '../../layout/navbar.php'; ?>
     </header>
@@ -30,7 +27,7 @@ $attributions = readAttributionJointure();
             <!-- FORMULAIRE -->
             <div class="mb-5   col-lg-8 col-md-8 col-12">
 
-                <h4 class="text-center mb-4"> <?php if (isset($userAttributions)) { echo 'ATTRIBUER  ' . $userAttributions; }
+                <h4 class="text-center mb-4"> <?php if (isset($userAttributions)) { echo 'MODIFIER RESERVATION  ' . $userAttributions; }
                 else { ?> FAIRE UNE ATTRIBUTION   <?php }
                 ?></h4>
 

@@ -7,8 +7,6 @@ $auth = "0";
 $update = "false";
 $errors = array();
 $success = array();
-
-
 //Si je clique sur le bouton de connection
 if (isset($_POST['connect-admin'])) {
     connectAdmin($_POST);
@@ -17,9 +15,6 @@ if (isset($_POST['connect-admin'])) {
 if (isset($_GET['disconnect-admin'])) {
     disconnectAdmin($GET);
 }
-
-
-
 // Si je clique sur le bouton ajouter un utilisateur
 if (isset($_POST['register-user'])) {
     registerUser($_POST);
@@ -32,9 +27,6 @@ if (isset($_POST['register-computer'])) {
 if (isset($_POST['register-attribution'])) {
     registerAttribution($_POST);
 }
-
-
-
 // si je clique sur l'icône modifier un utilisateur
 if (isset($_GET['edit-user'])) {
     $update = true;
@@ -54,10 +46,8 @@ if (isset($_GET['edit-attribution'])) {
     $attribution_id = $_GET['edit-attribution'];
      $userAttributions = readUserAtt($attribution_id);
     editAttribution($attribution_id);
+   
 }
-
-
-
 
 //si je clique sur le bouton mettre a jour un utilisateur
 if (isset($_POST['update-user'])) {
@@ -71,8 +61,6 @@ if (isset($_POST['update-computer'])) {
 if (isset($_POST['update-attribution'])) {
     updateAttribution();
 }
-
-
 
 //si je clique sur l'icone pr supprimer une attribution
 if (isset($_GET['delete-attribution'])) {
@@ -95,17 +83,17 @@ if (isset($_GET['delete-user'])) {
 }
 
 // FONCTION ajout d'ordinateur
-//good
+
 function registerComputer()
 {
     global $log;
     global $db_connect, $errors, $success, $number;
     $number = htmlentities(($_POST['number']));
     if (empty($number)) {
-        array_push($errors, "Veuillez choisir un numéro de poste");
+        array_push($errors, "Veuillez choisir un numéro de post");
     }
-    if ($number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de poste supérieur à 0");
+    if ($number > 15 || $number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
     $sql = "SELECT * FROM computers";
@@ -127,9 +115,9 @@ function registerComputer()
         array_push($success, "Ajout de l'ordinateur réussi");
     }
 }
-//function registerComputer good
+
 // FONCTION ajout utilisateur
-//good
+
 function registerUser()
 {
     global $log;
@@ -185,14 +173,11 @@ function registerUser()
 
 
 // FONCTION ajout d'ordinateur
-//good
+
 function registerAttribution()
 {
     global $log;
     global $db_connect, $errors, $success, $user_select, $computer_select, $date_select;
-
-
-
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
@@ -209,8 +194,6 @@ function registerAttribution()
     if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
-
-
     //on vérifie si un poste n'est pas déjà attribuer à un utilisateuravec le même numéro de Post informatique
     $sql = "SELECT * FROM attributions";
     $query = $db_connect->query($sql);
@@ -237,10 +220,8 @@ function registerAttribution()
     }
 }
 
-
-//fonction registerUser good
 // FONCTION CONNECTION ADMINISTRATEUR
-//good
+
 function connectAdmin()
 {
     global $log;
@@ -265,7 +246,7 @@ function connectAdmin()
         $user = $res->fetch_array();
         //en bdd le mot de passe est déjà hasher du coup on utilise la function de vérification de mot de passe crypté en bdd
         if (password_verify($password, $user['password'])) {
-            // echo 'mot de passe correct';
+            echo 'mot de passe correct';
             //on stocke l'information id de l'admin en session
             $_SESSION['user']['id'] = $user['id'];
             //on modifi en bdd le booleen d'authentification de 0 à 1
@@ -273,9 +254,9 @@ function connectAdmin()
             $query = $db_connect->query($sql);
             //on stock l'état d'authentification (ATTENTION!! ne pas oublier de le remettre à zéro lors de la déconnection de l'administrateur)
             $_SESSION['user']['auth'] = 1;
-            // array_push($succes, "Authentification réussie");
+            array_push($succes, "Authentification réussie");
             //redirection sur l'espace administrateur pour la gestion du parc d'ordinateur
-            header("Location: user-gestion.php");
+            header('location: attribution-gestion.php');
         } else {
             array_push($errors, "Mot de passe incorrect");
         }
@@ -283,9 +264,9 @@ function connectAdmin()
         array_push($errors, " Compte inexistant... <br/> Veuillez créer un compte.");
     }
 }
-//function connectAdmin good
+
 // FONCTION DECONNECTION ADMINISTRATEUR
-//good
+
 function disconnectAdmin()
 {
     global $db_connect;
@@ -300,9 +281,9 @@ function disconnectAdmin()
     //on redirige sur la page de bienvenue
     header('location: ../../../index.php');
 }
-//function disconnectAdmin good
+
 //FONCTION READUSER
-//good
+
 function readUsers()
 {
     global $db_connect;
@@ -312,7 +293,7 @@ function readUsers()
     return $users;
 }
 //FONCTION READUSER
-//good
+
 function readComputers()
 {
     global $db_connect;
@@ -323,7 +304,7 @@ function readComputers()
 }
 
 //FONCTION READ ATTRIBUTION
-//good
+
 function readAttributions()
 {
     global $db_connect;
@@ -334,7 +315,7 @@ function readAttributions()
 }
 
 //FINCTION edituser
-//good
+
 function editUser($user_id)
 {
     global $db_connect, $update, $role, $email, $user_id, $email, $phone, $first_name, $last_name;
@@ -346,32 +327,21 @@ function editUser($user_id)
     $email = $users['email'];
     $phone = $users['phone'];
 }
-// good
 
-// 8888888888888888888888888888
-//FINCTION editattribution
-//good
+//FONCTION editattribution
+
 function editAttribution($attribution_id)
 {
-
     global $db_connect, $update, $attribution_id, $user_select, $computer_select, $date_select;
     $update = true;
-    $sql = "SELECT * FROM attributions WHERE computer_id = $attribution_id LIMIT 1";
+    $sql = "SELECT * FROM attributions WHERE id = $attribution_id LIMIT 1";
     $query = $db_connect->query($sql);
     $attributions = $query->fetch_array(MYSQLI_ASSOC);
     $user_select = $attributions['user_id'];
     $computer_select = $attributions['computer_id'];
     $date_select = $attributions['crenaux'];
-    $attribution_id = ['computer_id'];
-    // $attribution_id = $computer_select;
-    // $attribution_id = $user_select;
-   
-
 }
-// good
 
-//FINCTION edituser
-//good
 function editComputer($computer_id)
 {
     global $db_connect, $update, $number, $computers;
@@ -380,8 +350,6 @@ function editComputer($computer_id)
     $computers = $query->fetch_array(MYSQLI_ASSOC);
     $number = $computers['numbers'];
 }
-// good
-
 
 function updateUser()
 {
@@ -412,16 +380,16 @@ function updateUser()
         array_push($errors, "Les deux mots de passe ne correspondent pas");
     }
     //On vérifie si le compte n'existe pas en bdd (éviter les doublons en bdd)
-    // $sql = "SELECT * FROM users";
-    // $query = $db_connect->query($sql);
-    // $users = $query->fetch_all(MYSQLI_ASSOC);
-    // if (is_array($users)) {
-    //     foreach ($users as $key => $user) {
-    //         if ($user['email'] === $email) {
-    //             array_push($errors, "Email déjà existant");
-    //         }
-    //     }
-    // }
+    $sql = "SELECT * FROM users";
+    $query = $db_connect->query($sql);
+    $users = $query->fetch_all(MYSQLI_ASSOC);
+    if (is_array($users)) {
+        foreach ($users as $key => $user) {
+            if ($user['email'] === $email) {
+                array_push($errors, "Email déjà existant");
+            }
+        }
+    }
     if (count($errors) == 0) {
         $user_id = $_POST['user_id'];
         $password_hash = password_hash($password_2, PASSWORD_DEFAULT);
@@ -445,8 +413,8 @@ function updateComputer()
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
-    if ($number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de poste supérieur à 0");
+    if ($number > 15 || $number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
     $sql = "SELECT * FROM computers";
@@ -475,11 +443,12 @@ function updateAttribution()
 {
     global $log;
     global $db_connect, $errors, $success, $attribution_id;
-    $attribution_id_verif = $attribution_id;
+   
+    // $attribution_id_verif = $attribution_id;
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
-    $attribution_id = $_POST['attribution_id'];
+  
 
     if (empty($user_select)) {
         array_push($errors, "Veuillez choisir un utilisateur disponible");
@@ -490,7 +459,7 @@ function updateAttribution()
     if (empty($date_select)) {
         array_push($errors, "Veuillez choisir une date disponible");
     }
-    if ($computer_select  < 0) {
+    if ( $computer_select < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
 
@@ -509,9 +478,11 @@ function updateAttribution()
             }
         }
     }
+
+
     if (count($errors) == 0) {
         $attribution_id = $_POST['attribution_id'];
-        $sql = "UPDATE `attributions` SET user_id = '$user_select', computer_id = '$computer_select' , crenaux = '$date_select',  update_at = now()  WHERE computer_id = '$attribution_id_verif' LIMIT 1 ";
+        $sql = "UPDATE  `attributions` SET user_id = '$user_select', computer_id = '$computer_select' , crenaux = '$date_select',  update_at = now()  WHERE computer_id = '$attribution_id' LIMIT 1 ";
         $req = $db_connect->prepare($sql); //preparation de la requete
         $req->execute(); //execution de la requete
         // $query = $db_connect->query($sql);
@@ -543,7 +514,7 @@ function deleteComputer($computer_id)
 //fonction delete attribution good
 function deleteAttribution($attribution_id)
 {
-    global  $db_connect, $log, $attribution_id, $success, $userCrenaux, $date_select;
+    global  $db_connect, $log, $attribution_id, $success;
     $reqt = "DELETE  FROM attributions WHERE computer_id = '$attribution_id' ";
     $reqUpdate = $db_connect->prepare($reqt); //preparation de la requete
     $reqUpdate->execute(); //execution de la requete
