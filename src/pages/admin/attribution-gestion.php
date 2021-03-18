@@ -115,11 +115,11 @@ $attributions = readAttributionJointure();
                     <!-- si on modifie l'utilisateur , on affiche le bouton de mise à jour au lieu du bouton de création -->
                     <?php if ($update === true) : ?>
                         <div class="d-flex justify-content-center m-5">
-                            <button type="submit" name="update-attribution" class="btn btn-dark shadow-lg ">Modifier </button>
+                            <button type="submit" name="update-attribution" class="btn btn-dark shadow-lg ">Modifier réservation </button>
                         </div>
                     <?php else : ?>
                         <div class="d-flex justify-content-center m-5">
-                            <button type="submit" name="register-attribution" class="btn btn-dark shadow-lg ">Valider </button>
+                            <button type="submit" name="register-attribution" class="btn btn-dark shadow-lg ">Valider réservation </button>
                         </div>
                     <?php endif; ?>
                     <!-- BOUTON AJOUTER -->
