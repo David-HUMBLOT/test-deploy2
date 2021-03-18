@@ -92,8 +92,8 @@ function registerComputer()
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
-    if ($number > 15 || $number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+    if ($number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
     $sql = "SELECT * FROM computers";
