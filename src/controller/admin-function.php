@@ -256,7 +256,7 @@ function connectAdmin()
             $_SESSION['user']['auth'] = 1;
             array_push($succes, "Authentification réussie");
             //redirection sur l'espace administrateur pour la gestion du parc d'ordinateur
-            header('location: attribution-gestion.php');
+            header("Location: user-gestion.php");
         } else {
             array_push($errors, "Mot de passe incorrect");
         }
