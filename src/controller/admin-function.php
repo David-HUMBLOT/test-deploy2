@@ -105,10 +105,10 @@ function registerComputer()
     global $db_connect, $errors, $success, $number;
     $number = htmlentities(($_POST['number']));
     if (empty($number)) {
-        array_push($errors, "Veuillez choisir un numéro de post");
+        array_push($errors, "Veuillez choisir un numéro de poste");
     }
-    if ($number > 15 || $number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+    if ($number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de poste supérieur à 0");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
     $sql = "SELECT * FROM computers";
@@ -448,20 +448,20 @@ function updateComputer()
     if (empty($number)) {
         array_push($errors, "Veuillez choisir un numéro de post");
     }
-    if ($number > 15 || $number < 0) {
-        array_push($errors, "Veuillez choisir un numéro de post compris entre 1 et 15");
+    if ($number < 0) {
+        array_push($errors, "Veuillez choisir un numéro de poste supérieur à 0");
     }
     //on vérifie si un poste n'est pas déjà créer avec le même numéro de Post informatique
-    // $sql = "SELECT * FROM computers";
-    // $query = $db_connect->query($sql);
-    // $computers = $query->fetch_all(MYSQLI_ASSOC);
-    // if (is_array($computers)) {
-    //     foreach ($computers as $key => $computer) {
-    //         if ($computer['number'] === $number) {
-    //             array_push($errors, "Ce numéro de post est déjà attribué");
-    //         }
-    //     }
-    // }
+    $sql = "SELECT * FROM computers";
+    $query = $db_connect->query($sql);
+    $computers = $query->fetch_all(MYSQLI_ASSOC);
+    if (is_array($computers)) {
+        foreach ($computers as $key => $computer) {
+            if ($computer['number'] === $number) {
+                array_push($errors, "Ce numéro de post est déjà attribué");
+            }
+        }
+    }
     if (count($errors) == 0) {
         $computer_id = $_POST['computer_id'];
         $etat = "0";

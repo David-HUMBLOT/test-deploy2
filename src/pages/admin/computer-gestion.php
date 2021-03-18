@@ -63,8 +63,6 @@ $computers = readComputers();
                         </input>
                     </div>
 
-           
-
                     <?php if ($update === true) : ?>
                         <div class="d-flex justify-content-center m-5 ">
                         <button type="submit" name="update-computer" class="btn btn-dark shadow-lg ">Modifier cet ordinateur</button>
