@@ -543,8 +543,8 @@ function deleteComputer($computer_id)
 //fonction delete attribution good
 function deleteAttribution($attribution_id)
 {
-    global  $db_connect, $log, $attribution_id, $success, $userCrenaux;
-    $reqt = "DELETE  FROM attributions WHERE computer_id = '$attribution_id' AND crenaux = '$userCrenaux'";
+    global  $db_connect, $log, $attribution_id, $success, $userCrenaux, $date_select;
+    $reqt = "DELETE  FROM attributions WHERE computer_id = '$attribution_id' UNION crenaux = '$date_select'";
     $reqUpdate = $db_connect->prepare($reqt); //preparation de la requete
     $reqUpdate->execute(); //execution de la requete
     array_push($success, "Suppression de l'attribution réussi");
