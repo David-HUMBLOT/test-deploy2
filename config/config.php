@@ -15,5 +15,4 @@ $pwd = "00cbd8e5";
 $db = "heroku_e725779b43b3b92";
 // connexion à la BDD
 $db_connect = mysqli_connect($host, $login, $pwd, $db);
-
 ?>
