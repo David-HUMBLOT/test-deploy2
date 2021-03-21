@@ -144,7 +144,7 @@ $attributions = readAttributionJointure();
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Utilisateur</th>
-                            <!-- <th scope="col">Ordinateur</th> -->
+                            <th scope="col">Ordinateur</th>
                             <th scope="col">Date</th>
                             <th scope="col">Horaire</th>
                             <th colspan="2">actions</th>
@@ -155,8 +155,8 @@ $attributions = readAttributionJointure();
                             <div class="user">
                                 <tr>
                                     <th scope="row"><?php echo $key + 1; ?></th>
-                                    <td class="align-middle "><?php echo $attribution['first_name']; ?> <br> sur PC <?php echo $attribution['numbers']; ?></td>
-                                    <!-- <td class="align-middle "><?php echo $attribution['numbers']; ?></td> -->
+                                    <td class="align-middle "><?php echo $attribution['first_name']; ?></td>
+                                    <td class="align-middle "><?php echo $attribution['numbers']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;"><?php echo $attribution['crenaux']; ?></td>
                                     <td class="align-middle " style="font-size:2vh;">   <?php echo $attribution['time_start']; ?>  ___ <?php echo $attribution['time_end']; ?></td>
                                     <td class="align-middle">
