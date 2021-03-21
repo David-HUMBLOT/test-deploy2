@@ -142,8 +142,7 @@ function registerUser()
     $email = trim($_POST['email']);
     $password_1 = trim($_POST['password_1']);
     $password_2 = trim($_POST['password_2']);
-    // $phone = htmlentities(($_POST['phone']));
-    $phone = (($_POST['phone']));
+    $phone = htmlentities(($_POST['phone']));
     if (empty($last_name)) {
         array_push($errors, "Entrer votre nom");
     }
@@ -410,7 +409,7 @@ function updateUser()
     $email = trim($_POST['email']);
     $password_1 = trim($_POST['password_1']);
     $password_2 = trim($_POST['password_2']);
-    $phone = (($_POST['phone']));
+    $phone = htmlentities(($_POST['phone']));
     if (empty($last_name)) {
         array_push($errors, "Entrer votre nom");
     }
