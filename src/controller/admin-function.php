@@ -429,16 +429,16 @@ function updateUser()
         array_push($errors, "Les deux mots de passe ne correspondent pas");
     }
     //On vérifie si le compte n'existe pas en bdd (éviter les doublons en bdd)
-    $sql = "SELECT * FROM users";
-    $query = $db_connect->query($sql);
-    $users = $query->fetch_all(MYSQLI_ASSOC);
-    if (is_array($users)) {
-        foreach ($users as $key => $user) {
-            if ($user['email'] === $email) {
-                array_push($errors, "Email déjà existant");
-            }
-        }
-    }
+    // $sql = "SELECT * FROM users";
+    // $query = $db_connect->query($sql);
+    // $users = $query->fetch_all(MYSQLI_ASSOC);
+    // if (is_array($users)) {
+    //     foreach ($users as $key => $user) {
+    //         if ($user['email'] === $email) {
+    //             array_push($errors, "Email déjà existant");
+    //         }
+    //     }
+    // }
     if (count($errors) == 0) {
         $user_id = $_POST['user_id'];
         $password_hash = password_hash($password_2, PASSWORD_DEFAULT);
