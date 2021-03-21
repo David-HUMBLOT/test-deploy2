@@ -9,8 +9,6 @@ $errors = array();
 $success = array();
 $time_start="";
 $time_start="";
-
-
 //Si je clique sur le bouton de connection
 if (isset($_POST['connect-admin'])) {
     connectAdmin($_POST);
@@ -19,9 +17,6 @@ if (isset($_POST['connect-admin'])) {
 if (isset($_GET['disconnect-admin'])) {
     disconnectAdmin($GET);
 }
-
-
-
 // Si je clique sur le bouton ajouter un utilisateur
 if (isset($_POST['register-user'])) {
     registerUser($_POST);
@@ -34,9 +29,6 @@ if (isset($_POST['register-computer'])) {
 if (isset($_POST['register-attribution'])) {
     registerAttribution($_POST);
 }
-
-
-
 // si je clique sur l'icône modifier un utilisateur
 if (isset($_GET['edit-user'])) {
     $update = true;
@@ -51,17 +43,11 @@ if (isset($_GET['edit-computer'])) {
 }
 // si je clique sur l'icône modifier une attribution
 if (isset($_GET['edit-attribution'])) {
-
     $update = true;
     $attribution_id = $_GET['edit-attribution'];
      $userAttributions = readUserAtt($attribution_id);
     editAttribution($attribution_id);
-   
 }
-
-
-
-
 //si je clique sur le bouton mettre a jour un utilisateur
 if (isset($_POST['update-user'])) {
     updateUser();
@@ -74,9 +60,6 @@ if (isset($_POST['update-computer'])) {
 if (isset($_POST['update-attribution'])) {
     updateAttribution();
 }
-
-
-
 //si je clique sur l'icone pr supprimer une attribution
 if (isset($_GET['delete-attribution'])) {
     $attribution_id = $_GET['delete-attribution'];
@@ -98,7 +81,7 @@ if (isset($_GET['delete-user'])) {
 }
 
 // FONCTION ajout d'ordinateur
-//good
+
 function registerComputer()
 {
     global $log;
@@ -130,9 +113,9 @@ function registerComputer()
         array_push($success, "Ajout de l'ordinateur réussi");
     }
 }
-//function registerComputer good
+
 // FONCTION ajout utilisateur
-//good
+
 function registerUser()
 {
     global $log;
@@ -186,22 +169,17 @@ function registerUser()
     }
 }
 
-
 // FONCTION ajout d'ordinateur
-//good
+
 function registerAttribution()
 {
     global $log;
     global $db_connect, $errors, $success, $user_select, $computer_select, $date_select, $time_start, $time_end;
-
-
-
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
     $time_start = ($_POST['time-start']);
     $time_end = ($_POST['time-end']);
-
     if (empty($user_select)) {
         array_push($errors, "Veuillez choisir un utilisateur disponible");
     }
@@ -220,12 +198,9 @@ function registerAttribution()
     // if (empty($time_end)) {
     //     array_push($errors, "Selectionner heure de fin");
     // }
-
     if ($computer_select  < 0) {
         array_push($errors, "Veuillez choisir un numéro de post supérieur à 0");
     }
-
-
     //on vérifie si un poste n'est pas déjà attribuer à un utilisateuravec le même numéro de Post informatique
     $sql = "SELECT * FROM attributions";
     $query = $db_connect->query($sql);
@@ -252,10 +227,8 @@ function registerAttribution()
     }
 }
 
-
-//fonction registerUser good
 // FONCTION CONNECTION ADMINISTRATEUR
-//good
+
 function connectAdmin()
 {
     global $log;
@@ -298,9 +271,9 @@ function connectAdmin()
         array_push($errors, " Compte inexistant... <br/> Veuillez créer un compte.");
     }
 }
-//function connectAdmin good
+
 // FONCTION DECONNECTION ADMINISTRATEUR
-//good
+
 function disconnectAdmin()
 {
     global $db_connect;
@@ -315,9 +288,9 @@ function disconnectAdmin()
     //on redirige sur la page de bienvenue
     header('location: ../../../index.php');
 }
-//function disconnectAdmin good
+
 //FONCTION READUSER
-//good
+
 function readUsers()
 {
     global $db_connect;
@@ -326,8 +299,9 @@ function readUsers()
     $users = $query->fetch_all(MYSQLI_ASSOC);
     return $users;
 }
-//FONCTION READUSER
-//good
+
+//FONCTION COMPUTERS
+
 function readComputers()
 {
     global $db_connect;
@@ -338,7 +312,7 @@ function readComputers()
 }
 
 //FONCTION READ ATTRIBUTION
-//good
+
 function readAttributions()
 {
     global $db_connect;
@@ -348,8 +322,8 @@ function readAttributions()
     return $attributions;
 }
 
-//FINCTION edituser
-//good
+//FONCTION edituser
+
 function editUser($user_id)
 {
     global $db_connect, $update, $role, $email, $user_id, $email, $phone, $first_name, $last_name;
@@ -361,11 +335,9 @@ function editUser($user_id)
     $email = $users['email'];
     $phone = $users['phone'];
 }
-// good
 
-// 8888888888888888888888888888
-//FINCTION editattribution
-//good
+//FONCTION editattribution
+
 function editAttribution($attribution_id)
 {
 
@@ -379,16 +351,10 @@ function editAttribution($attribution_id)
     $date_select = $attributions['crenaux'];
     $time_start_select = $attributions['time_start'];
     $time_end_select = $attributions['time_end'];
-    // $attribution_id = ['computer_id'];
-    // $attribution_id = $computer_select;
-    // $attribution_id = $user_select;
-   
-
 }
-// good
 
-//FINCTION edituser
-//good
+//FONCTION edituser
+
 function editComputer($computer_id)
 {
     global $db_connect, $update, $number, $computers;
@@ -397,8 +363,8 @@ function editComputer($computer_id)
     $computers = $query->fetch_array(MYSQLI_ASSOC);
     $number = $computers['numbers'];
 }
-// good
 
+//FONCTION updateuser
 
 function updateUser()
 {
@@ -453,7 +419,9 @@ function updateUser()
         // $log->log('inscription', 'err_inscription', "Fonction registerUser() : l'inscription a échoué", Log::FOLDER_MONTH);
     }
 }
+
 // FONCTION modification d'ordinateur
+
 function updateComputer()
 {
     global $log;
@@ -488,20 +456,17 @@ function updateComputer()
 }
 
 // FONCTION modification d'ordinateur
+
 function updateAttribution()
 {
     global $log;
     global $db_connect, $errors, $success, $attribution_id;
-   
     // $attribution_id_verif = $attribution_id;
     $user_select = htmlentities(($_POST['user-select'])); //value de id users recupérer 
     $computer_select = htmlentities(($_POST['computer-select'])); //value de id pc recupérer 
     $date_select = ($_POST['date-select']);
     $time_start = ($_POST['time-start']);
     $time_end = ($_POST['time-end']);
-
-  
-
     if (empty($user_select)) {
         array_push($errors, "Veuillez choisir un utilisateur disponible");
     }
@@ -536,8 +501,6 @@ function updateAttribution()
             }
         }
     }
-
-
     if (count($errors) == 0) {
         $attribution_id = $_POST['attribution_id'];
         $sql = "UPDATE  `attributions` SET user_id = '$user_select', computer_id = '$computer_select' ,
@@ -553,7 +516,8 @@ function updateAttribution()
     }
 }
 
-//fonction delete user good
+//fonction delete user 
+
 function deleteUser($user_id)
 {
     global  $db_connect, $log, $user_id, $success;
@@ -564,7 +528,8 @@ function deleteUser($user_id)
     array_push($success, "Suppression utilisateur réussi");
 }
 
-//fonction delete computer good
+//fonction delete computer 
+
 function deleteComputer($computer_id)
 {
     global  $db_connect, $log, $computer_id, $success;
@@ -574,7 +539,8 @@ function deleteComputer($computer_id)
     array_push($success, "Suppression de l'ordinateur réussi");
 }
 
-//fonction delete attribution good
+//fonction delete attribution 
+
 function deleteAttribution($attribution_id)
 {
     global  $db_connect, $log, $attribution_id, $success;
@@ -585,6 +551,7 @@ function deleteAttribution($attribution_id)
 }
 
 // fonction de lecture par jointure
+
 function readAttributionJointure()
 {
     global $db_connect;
@@ -598,26 +565,19 @@ function readAttributionJointure()
 function readUserAtt()
 {
     global $db_connect, $attribution_id;
-   //   888888888888888888888
 //    $sql = " SELECT users.first_name FROM users INNER JOIN attributions  on  attributions.user_id = users.id  WHERE attributions.computer_id = $attribution_id  AND INNER JOIN attributions on computers.id = attributions.computer_id  ";
- 
-   $sql = " SELECT * FROM attributions INNER JOIN users ON attributions.user_id = users.id  WHERE attributions.computer_id = $attribution_id limit 1 ";
 
-   $query = $db_connect->query($sql);
-   $userAttributions = $query->fetch_all(MYSQLI_ASSOC);
+$sql = " SELECT * FROM attributions INNER JOIN users ON attributions.user_id = users.id  WHERE attributions.computer_id = $attribution_id limit 1 ";
 
- foreach ( $userAttributions as $key =>   $userAttribution) :
-
-    $userAtt = $userAttribution['first_name'];
-    $userCrenaux = $userAttribution['crenaux'];
-
-  
- endforeach;
-   
- return $userAtt;
- return   $userAttributions;
- return $userCrenaux;
-
+$query = $db_connect->query($sql);
+$userAttributions = $query->fetch_all(MYSQLI_ASSOC);
+foreach ( $userAttributions as $key =>   $userAttribution) :
+$userAtt = $userAttribution['first_name'];
+$userCrenaux = $userAttribution['crenaux'];
+endforeach;
+return $userAtt;
+return   $userAttributions;
+return $userCrenaux;
 }
 
 
